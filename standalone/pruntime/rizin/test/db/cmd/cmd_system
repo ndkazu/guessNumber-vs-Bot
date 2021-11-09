@@ -1,0 +1,64 @@
+NAME=!
+FILE==
+CMDS=<<EOF
+?e magic
+?e yeah
+!echo magic
+!echo yeah
+EOF
+EXPECT=<<EOF
+magic
+yeah
+magic
+yeah
+EOF
+RUN
+
+NAME=!| grep
+FILE==
+CMDS=!echo magic|grep bob
+EXPECT=<<EOF
+EOF
+RUN
+
+NAME=!| sed
+FILE==
+CMDS=!echo magic|sed -e s,magic,yeah,
+EXPECT=<<EOF
+yeah
+EOF
+RUN
+
+NAME=?e|
+FILE==
+CMDS=?e magic|sed -e s,magic,yeah,
+EXPECT=<<EOF
+yeah
+EOF
+RUN
+
+NAME=p8 `?e 3`
+FILE==
+CMDS=p8 `?e 3`
+EXPECT=<<EOF
+000000
+EOF
+RUN
+
+NAME=p8 `!echo 3`
+FILE==
+CMDS=p8 `!echo 3`
+EXPECT=<<EOF
+000000
+EOF
+RUN
+
+NAME=!echo "test"
+FILE==
+CMDS=<<EOF
+!echo test
+EOF
+EXPECT=<<EOF
+test
+EOF
+RUN

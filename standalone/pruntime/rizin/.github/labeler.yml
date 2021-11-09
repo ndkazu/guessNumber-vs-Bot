@@ -1,0 +1,148 @@
+rizin:
+  - binrz/rizin/*
+  - librz/main/rizin.c
+
+rz-bin:
+  - binrz/rz-bin/*
+  - librz/main/rz_bin.c
+
+rz-diff:
+  - binrz/rz-diff/*
+  - librz/main/rz_diff.c
+
+rz-find:
+  - binrz/rz-find/*
+  - librz/main/rz_find.c
+
+rz-gg:
+  - binrz/rz-gg/*
+  - librz/main/rz_gg.c
+
+rz-hash:
+  - binrz/rz-hash/*
+  - librz/main/rz_hash.c
+
+rz-run:
+  - binrz/rz-run/*
+  - librz/main/rz_run.c
+
+rz-asm:
+  - binrz/rz-asm/*
+  - librz/main/rz_asm.c
+
+rz-ax:
+  - binrz/rz-ax/*
+  - librz/main/rz_ax.c
+
+RzAnalysis:
+  - librz/analysis/**/*
+
+RzAsm-Assembler:
+  - librz/asm/**/*ass*
+  - librz/asm/asm_x86_nz.c
+
+RzAsm-Disassembler:
+  - librz/asm/**/*dis*
+
+RzBin:
+  - librz/bin/**/*
+
+RzBreakpoint:
+  - librz/bp/**/*
+
+RzConfig:
+  - librz/config/**/*
+
+RzCons:
+  - librz/cons/**/*
+
+RzCore:
+  - librz/core/**/*
+
+RzCrypto:
+  - librz/crypto/**/*
+
+RzDebug:
+  - librz/debug/**/*
+
+RzEgg:
+  - librz/egg/**/*
+
+RzFlag:
+  - librz/flag/**/*
+
+RzHash:
+  - librz/hash/**/*
+
+RzIO:
+  - librz/io/**/*
+
+RzLang:
+  - librz/lang/**/*
+
+RzMagic:
+  - librz/magic/**/*
+
+RzParse:
+  - librz/parse/**/*
+
+RReg:
+  - librz/reg/**/*
+
+RzSearch:
+  - librz/search/**/*
+
+RzSocket:
+  - librz/socket/**/*
+
+RzSyscall:
+  - librz/syscall/**/*
+
+RzType:
+  - librz/type/**/*
+
+RzUtil:
+  - librz/util/**/*
+
+API:
+  - librz/include/**/*
+
+buildsystem:
+  - sys/**/*
+
+command:
+  - librz/core/cmd*
+
+documentation:
+  - doc/**/*
+
+ESIL:
+  - librz/analysis/esil/*
+
+gdb:
+  - shlr/gdb/**/*
+  - librz/io/p/io_gdb.c
+
+infrastructure:
+  - .appveyor.yml
+  - .travis.yml
+  - .lgtm.yml
+  - .builds/**/*
+  - .github/workflows/*
+
+rz-test:
+  - binrz/rz-test/*
+  - test/**/*
+
+java:
+  - shlr/java/**/*
+
+WinDbg:
+  - shlr/winkd/**/*
+  - librz/io/p/io_winkd.c
+
+visual:
+  - librz/core/visual.c
+
+panel:
+  - librz/core/panels.c

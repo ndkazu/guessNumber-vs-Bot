@@ -1,0 +1,45 @@
+[package]
+name = "pherry"
+version = "0.1.0"
+authors = ["h4x3rotab <h4x3rotab@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+anyhow = "1.0"
+env_logger = "0.9.0"
+futures = { package = "futures", version = "0.3.4" }
+log = "0.4"
+tokio = { version = "1.9.0", features = ["full"] }
+reqwest = { version = "0.11" }
+hex = { version = "*" }
+base64 = "0.13.0"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+rand = "0.8.4"
+structopt = { version = "0.3" }
+
+subxt = { path = "../../subxt", package = "substrate-subxt", default-features = false, features = ["tokio1"] }
+async-trait = "0.1.49"
+system = { path = "../../substrate/frame/system", package = "frame-system" }
+sp-core = { path = "../../substrate/primitives/core" }
+sp-rpc = { path = "../../substrate/primitives/rpc", package = "sp-rpc" }
+sc-rpc-api = { path = "../../substrate/client/rpc-api", package = "sc-rpc-api" }
+sp-runtime = { path = "../../substrate/primitives/runtime", package = "sp-runtime" }
+sc-finality-grandpa = { path = "../../substrate/client/finality-grandpa" }
+sp-finality-grandpa = { package = "sp-finality-grandpa", path = "../../substrate/primitives/finality-grandpa", default-features = false }
+codec = { package = 'parity-scale-codec', version = "2.1" }
+
+pallet-grandpa = { path = "../../substrate/frame/grandpa" }
+pallet-indices = { path = "../../substrate/frame/indices" }
+balances = { package = "pallet-balances", path = "../../substrate/frame/balances" }
+sp-keyring = { package = "sp-keyring", path = "../../substrate/primitives/keyring" }
+
+phala-types = { path = "../../crates/phala-types" }
+phala-pallets = { path = "../../pallets/phala" }
+phala-trie-storage = { path = "../../crates/phala-trie-storage" }
+phala-node-rpc-ext = { path = "../../crates/phala-node-rpc-ext" }
+phactory-api = { path = "../../crates/phactory/api", features = ["pruntime-client"] }
+
+maxminddb = "0.17"

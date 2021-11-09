@@ -1,0 +1,40 @@
+NAME=&
+FILE==
+CMDS=<<EOF
+& ?e Hello\nfrom\na task!
+&& 1
+&= 1
+EOF
+EXPECT=<<EOF
+Hello
+from
+a task!
+
+EOF
+RUN
+
+NAME=& + grep
+ARGS=-e cfg.oldshell=false
+FILE==
+CMDS=<<EOF
+& "?e Hello\nfrom\na task!~task"
+&& 1
+&= 1
+EOF
+EXPECT=<<EOF
+a task!
+
+EOF
+RUN
+
+NAME=&j
+FILE==
+CMDS=<<EOF
+& ?e Hello\nfrom\na task!
+&& 1
+&j
+EOF
+EXPECT=<<EOF
+[{"id":0,"state":"running","transient":false},{"id":1,"state":"done","transient":false,"cmd":"?e Hello\\nfrom\\na task!"}]
+EOF
+RUN

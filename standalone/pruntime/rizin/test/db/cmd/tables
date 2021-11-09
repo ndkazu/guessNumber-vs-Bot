@@ -1,0 +1,226 @@
+NAME=tables sum
+FILE=bins/elf/analysis/elf-virtualtable
+CMDS=<<EOF
+f,:size/sum
+EOF
+EXPECT=<<EOF
+size  
+------
+16.8K
+
+EOF
+RUN
+
+NAME=tables sort
+FILE=bins/elf/analysis/elf-virtualtable
+CMDS=<<EOF
+f,:size/cols:size/sort:size/uniq
+EOF
+EXPECT=<<EOF
+size 
+-----
+0
+1
+2
+3
+4
+6
+8
+9
+13
+16
+17
+21
+23
+24
+26
+28
+32
+36
+42
+43
+52
+56
+62
+64
+66
+68
+80
+88
+96
+101
+104
+124
+158
+176
+203
+240
+256
+268
+272
+432
+448
+464
+497
+512
+540
+978
+1160
+1255
+2424
+4132
+
+EOF
+RUN
+
+NAME=tables csv
+FILE=bins/elf/analysis/elf-virtualtable
+CMDS=<<EOF
+f,:size/ne/0:addr/ne/0x00000000:/head/10,:csv~:..20
+f,:space/eq/relocs:addr/cols/name:/head/3:json~{}
+f,:/head/10:/tail/4:space/cols/name
+f,:/page/2/10:sort/cols/space/size/name:size/sort/inc:fancy
+EOF
+EXPECT=<<EOF
+addr,size,space,name
+0x00400000,4132,segments,segment.LOAD0
+0x00400000,64,segments,segment.ehdr
+0x00400040,448,segments,segment.PHDR
+0x00400200,28,sections,section..interp
+0x00400200,28,segments,segment.INTERP
+0x0040021c,32,sections,section..note.ABI_tag
+0x0040021c,68,segments,segment.NOTE
+0x0040023c,36,sections,section..note.gnu.build_id
+0x00400260,56,sections,section..gnu.hash
+0x00400298,432,sections,section..dynsym
+
+[
+  {
+    "addr": 6296136,
+    "name": "reloc.__gmon_start"
+  },
+  {
+    "addr": 6296168,
+    "name": "reloc.std::ostream::operator___int"
+  },
+  {
+    "addr": 6296176,
+    "name": "reloc.operator_delete_void"
+  }
+]
+
+space            name                                
+-----------------------------------------------------
+segments         segment.GNU_STACK
+symbols.sections sym..comment
+imports          loc.imp.__gmon_start
+imports          loc.imp._Jv_RegisterClasses
+imports          loc.imp._ITM_deregisterTMCloneTable
+
+.----------------------------------------------------------------------------------------------------.
+| space     | size  | name                                                                           |
+)----------------------------------------------------------------------------------------------------(
+| classes   | 1     | class.std::ostream                                                             |
+| classes   | 1     | class.std::ios_base::Init                                                      |
+| classes   | 1     | class.std::basic_ostream_char__std::char_traits_char_____std::operator____std  |
+| classes   | 1     | class.std::basic_ostream_char__std::char_traits_char_____std::endl_char__std   |
+| classes   | 1     | class.B                                                                        |
+| classes   | 1     | class.A                                                                        |
+| classes   | 1     | class.C                                                                        |
+| imports   | 16    | loc.imp._ITM_registerTMCloneTable                                              |
+| imports   | 16    | loc.imp._ITM_deregisterTMCloneTable                                            |
+| segments  | 64    | segment.ehdr                                                                   |
+| segments  | 4132  | segment.LOAD0                                                                  |
+`----------------------------------------------------------------------------------------------------'
+
+EOF
+RUN
+
+NAME=afl table
+FILE=bins/elf/hello_world
+CMDS=<<EOF
+s main
+af
+aflt:simple
+EOF
+EXPECT=<<EOF
+addr       size name           nbbs xref calls cc noreturn 
+-----------------------------------------------------------
+0x000007aa 157  main           3    9    6     2  
+0x00000660 6    sym.imp.strlen 1    1    0     1  
+0x00000670 6    sym.imp.malloc 1    1    0     1  
+0x00000640 6    sym.imp.strcpy 1    1    0     1  
+0x00000680 6    sym.imp.strcat 1    1    0     1  
+0x00000650 6    sym.imp.puts   1    1    0     1  
+0x00000630 6    sym.imp.free   1    1    0     1  
+
+EOF
+RUN
+
+NAME=tables sum
+FILE=bins/elf/hello_world
+CMDS=<<EOF
+s main
+af
+afbt
+afbt:fancy
+afbt:size/sort/inc:simple
+EOF
+EXPECT=<<EOF
+addr  size jump  fail  
+-----------------------
+0x7aa 92   0x844 0x806
+0x806 62   0x844 -1
+0x844 3    -1    -1
+.----------------------------------.
+| addr   | size  | jump   | fail   |
+)----------------------------------(
+| 0x7aa  | 92    | 0x844  | 0x806  |
+| 0x806  | 62    | 0x844  | -1     |
+| 0x844  | 3     | -1     | -1     |
+`----------------------------------'
+addr  size jump  fail  
+-----------------------
+0x844 3    -1    -1
+0x806 62   0x844 -1
+0x7aa 92   0x844 0x806
+EOF
+RUN
+
+NAME=tables gt/ge/lt/le
+FILE=bins/elf/ls
+CMDS=<<EOF
+omt:size/ge/0x3480:size
+?e
+omt:size/gt/0x3480:size/cols
+?e
+omt:size/le/0x3480:size:quiet
+?e
+omtq:size/lt/0x3480:size/cols
+EOF
+EXPECT=<<EOF
+.----------.
+| size     |
+)----------(
+| 0x3480   |
+| 0x12791  |
+| 0x87c0   |
+`----------'
+
+.----------.
+| size     |
+)----------(
+| 0x12791  |
+| 0x87c0   |
+`----------'
+
+0x9b8
+0x3480
+0x12f0
+0x1218
+
+0x9b8
+0x12f0
+0x1218
+EOF
+RUN

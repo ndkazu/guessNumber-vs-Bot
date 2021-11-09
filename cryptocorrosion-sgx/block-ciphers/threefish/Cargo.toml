@@ -1,0 +1,18 @@
+[package]
+name = "threefish-cipher"
+version = "0.4.0"
+authors = ["The Rust-Crypto Project Developers", "The Cryptocorrosion Contributors"]
+license = "MIT/Apache-2.0"
+description = "Threefish block cipher"
+documentation = "https://docs.rs/threefish"
+repository = "https://github.com/cryptocorrosion/cryptocorrosion"
+keywords = ["crypto", "threefish", "gost", "block-cipher"]
+
+[dependencies]
+cipher = "0.2"
+
+[dev-dependencies]
+hex-literal = "0.2"
+
+[features]
+no_unroll = []

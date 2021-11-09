@@ -1,0 +1,37 @@
+[workspace]
+
+exclude = [
+	"substrate",
+	"subxt",
+	"webpki",
+	"ring",
+	"native-nostd-hasher",
+	"standalone/pruntime",
+]
+
+members = [
+	"standalone/executor",
+	"standalone/rpc",
+	"standalone/node",
+	"standalone/runtime",
+	"standalone/pherry",
+	"crates/phala-trie-storage",
+	"crates/phala-mq",
+	"crates/phala-crypto",
+	"crates/prpc",
+	"crates/prpc-build",
+	"crates/phala-node-rpc-ext",
+	"crates/phactory",
+	"crates/phactory/api",
+	"crates/phactory/pal",
+	"crates/phala-types",
+	"crates/phala-async-executor",
+	"crates/phala-allocator",
+	"pallets/phala",
+	"pallets/phala/mq-runtime-api",
+	"pallets/bridge",
+	"scripts/toml-upgrade-version",
+	"scripts/debug-cli"
+]
+
+resolver = "2"
